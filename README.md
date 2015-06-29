@@ -2,6 +2,8 @@
 
 adapted from https://gist.github.com/cliffano/9868180
 
+## Example
+
 ```
 $ ansible-playbook foo.yml
 ...
@@ -30,3 +32,7 @@ changed: [host4]
 -----> host4 [|] date [|] stdout
        Mon Jun 29 16:24:05 PDT 2015
 ```
+
+## License
+
+MIT
