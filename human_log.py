@@ -14,14 +14,14 @@ def human_log(callback, host, res):
     if hasattr(res, 'startswith'):
         if callback == 'runner_on_unreachable':
             print('-----> ERROR: {host} was unreachable'.format(host=host))
-        print('\n'.join(['       %s' % line for line in res.splitlines()]))
+        print(u"\n".join([u"       %s" % line for line in res.splitlines()]).encode("utf-8"))
     elif type(res) == type(dict()):
         for field in FIELDS:
             if field in res.keys():
                 print('-----> {host} [|] {cmd} [|] {field}'.format(
                       host=host, cmd=res['cmd'], field=field))
                 lines = res[field].splitlines()
-                print('\n'.join(['       %s' % line for line in lines]))
+                print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
 
 
 class CallbackModule(object):
