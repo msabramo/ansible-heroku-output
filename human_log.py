@@ -2,6 +2,7 @@
 
 import json
 import os
+#from pprint import pprint
 
 FIELDS = os.environ.get('ANSIBLE_HUMAN_LOG_FIELDS')
 if FIELDS:
@@ -14,14 +15,25 @@ def human_log(callback, host, res):
     if hasattr(res, 'startswith'):
         if callback == 'runner_on_unreachable':
             print('-----> ERROR: {host} was unreachable'.format(host=host))
-        print('\n'.join(['       %s' % line for line in res.splitlines()]))
+        print(u"\n".join([u"       %s" % line for line in res.splitlines()]).encode("utf-8"))
     elif type(res) == type(dict()):
+        #pprint(res)
         for field in FIELDS:
             if field in res.keys():
-                print('-----> {host} [|] {cmd} [|] {field}'.format(
-                      host=host, cmd=res['cmd'], field=field))
-                lines = res[field].splitlines()
-                print('\n'.join(['       %s' % line for line in lines]))
+		if 'cmd' in res.keys():
+                    print('-----> {host} [|] {cmd} [|] {field}'.format(
+                          host=host, cmd=res['cmd'], field=field))
+                    lines = res[field].splitlines()
+                    print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
+		elif 'invocation' in res.keys():
+                    print('-----> {host} [|] {module_args} [|] {field}'.format(
+                          host=host, module_args=res['invocation']['module_args'], field=field))
+                    lines = res[field].splitlines()
+                    print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
+	        else:
+                    print('-----> {host} [|] {field}'.format(host=host, field=field))
+                    lines = res[field].splitlines()
+                    print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
 
 
 class CallbackModule(object):
