@@ -1,3 +1,6 @@
 sudo: false
+language: python
+before_script:
+  - pip install ansible
 script:
   - ./run-tests
