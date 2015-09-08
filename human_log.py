@@ -21,8 +21,8 @@ def human_log(callback, host, res):
         for field in FIELDS:
             if field in res.keys():
                 if 'cmd' in res.keys():
-                    print('-----> {host} [|] {cmd} [|] {field}'.format(
-                        host=host, cmd=res['cmd'], field=field))
+                    print(u'-----> {host} [|] {cmd} [|] {field}'.format(
+                        host=host, cmd=res['cmd'], field=field).encode("utf-8"))
                     lines = res[field].splitlines()
                     print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
             elif 'invocation' in res.keys():
