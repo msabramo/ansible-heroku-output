@@ -1,3 +1,7 @@
-git clone https://github.com/sstephenson/bats test/batstoolclone
-test/batstoolclone/install.sh test/batstool
-test/batstool/bin/bats test/bats
+BATS_INSTALL_DIR=test/batstool
+BATS_GIT_CLONE_DIR=test/tmp/batstool.git
+
+[ -d ${BATS_GIT_CLONE_DIR} ] || git clone https://github.com/sstephenson/bats ${BATS_GIT_CLONE_DIR}
+[ -d ${BATS_INSTALL_DIR} ] || ${BATS_GIT_CLONE_DIR}/install.sh ${BATS_INSTALL_DIR}
+
+${BATS_INSTALL_DIR}/bin/bats test/bats
