@@ -1,0 +1,3 @@
+git clone https://github.com/sstephenson/bats test/batstoolclone
+test/batstoolclone/install.sh test/batstool
+test/batstool/bin/bats test/bats
