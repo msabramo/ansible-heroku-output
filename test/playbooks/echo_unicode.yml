@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: echo some Chinese characters
+      shell: echo "测试"
