@@ -5,5 +5,4 @@
   [ "$status" -eq 0 ]
   [[ "$output" = *"-----> localhost [|] echo \"This is plain old ASCII\" [|] stdout"* ]]
   [[ "$output" = *"       This is plain old ASCII"* ]]
-  [[ "$output" = *"-----> localhost [|] echo \"This is plain old ASCII\" [|] stderr"* ]]
 }
