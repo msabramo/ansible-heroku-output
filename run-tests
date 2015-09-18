@@ -5,3 +5,6 @@ BATS_GIT_CLONE_DIR=test/tmp/batstool.git
 [ -d ${BATS_INSTALL_DIR} ] || ${BATS_GIT_CLONE_DIR}/install.sh ${BATS_INSTALL_DIR}
 
 ${BATS_INSTALL_DIR}/bin/bats test/bats
+
+pip install flake8
+flake8 .

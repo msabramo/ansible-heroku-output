@@ -1,8 +1,6 @@
 # adapted from https://gist.github.com/cliffano/9868180
 
-import json
 import os
-#from pprint import pprint
 
 FIELDS = os.environ.get('ANSIBLE_HUMAN_LOG_FIELDS')
 if FIELDS:
@@ -15,9 +13,9 @@ def human_log(callback, host, res):
     if hasattr(res, 'startswith'):
         if callback == 'runner_on_unreachable':
             print('-----> ERROR: {host} was unreachable'.format(host=host))
-        print(u"\n".join([u"       %s" % line for line in res.splitlines()]).encode("utf-8"))
+        print(u"\n".join([
+            u"       %s" % line for line in res.splitlines()]).encode("utf-8"))
     elif type(res) == type(dict()):
-        #pprint(res)
         for field in FIELDS:
             if field in res.keys():
                 lines = res[field].splitlines()
@@ -26,14 +24,20 @@ def human_log(callback, host, res):
 
                 if 'cmd' in res.keys():
                     print(u'-----> {host} [|] {cmd} [|] {field}'.format(
-                        host=host, cmd=res['cmd'], field=field).encode("utf-8"))
+                        host=host,
+                        cmd=res['cmd'],
+                        field=field).encode("utf-8"))
                 elif 'invocation' in res.keys():
                     print('-----> {host} [|] {module_args} [|] {field}'.format(
-                        host=host, module_args=res['invocation']['module_args'], field=field))
+                        host=host,
+                        module_args=res['invocation']['module_args'],
+                        field=field))
                 else:
-                    print('-----> {host} [|] {field}'.format(host=host, field=field))
+                    print('-----> {host} [|] {field}'.format(
+                        host=host, field=field))
 
-                print(u"\n".join([u"       %s" % line for line in lines]).encode("utf-8"))
+                print(u"\n".join([
+                    u"       %s" % line for line in lines]).encode("utf-8"))
 
 
 class CallbackModule(object):
@@ -83,7 +87,10 @@ class CallbackModule(object):
     def playbook_on_task_start(self, name, is_conditional):
         pass
 
-    def playbook_on_vars_prompt(self, varname, private=True, prompt=None, encrypt=None, confirm=False, salt_size=None, salt=None, default=None):
+    def playbook_on_vars_prompt(
+            self, varname, private=True, prompt=None,
+            encrypt=None, confirm=False, salt_size=None, salt=None,
+            default=None):
         pass
 
     def playbook_on_setup(self):
