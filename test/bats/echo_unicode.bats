@@ -5,5 +5,4 @@
   [ "$status" -eq 0 ]
   [[ "$output" = *"-----> localhost [|] echo \"测试\" [|] stdout"* ]]
   [[ "$output" = *"       测试"* ]]
-  [[ "$output" = *"-----> localhost [|] echo \"测试\" [|] stderr"* ]]
 }
